@@ -25,15 +25,15 @@ RUN apt update && apt install -y \
     php-mysql \
     kali-linux-headless
 
-RUN apt update && apt install -y \
-    slowhttptest \
-    thc-ssl-dos \
-    siege
-
 RUN wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
 RUN tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
 RUN rm -f go1.22.5.linux-amd64.tar.gz
 RUN echo "PATH=$PATH:/usr/local/go/bin" >> /root/.profile
+
+RUN apt update && apt install -y \
+    slowhttptest \
+    thc-ssl-dos \
+    siege
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
@@ -45,8 +45,6 @@ RUN unset DEBIAN_FRONTEND && rm -f /usr/sbin/policy-rc.d
 # Production step
 # -----------------------------------------------------------------------------
 FROM base AS production
-
-
 
 COPY ./scripts $RUNTIME_DIR/scripts
 
