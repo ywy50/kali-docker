@@ -10,7 +10,7 @@ ENV RUNTIME_DIR="/opt/app"
 WORKDIR $RUNTIME_DIR
 
 RUN apt update
-RUN apt install -y python3 g++ libpython3-dev smbclient gcc apache2 qt6-base-dev-tools php-mysql
+RUN apt install -y python3 g++ libpython3-dev smbclient gcc apache2 qt6-base-dev-tools php-mysql ruby3.0-dev python3-pip
 RUN apt install -y kali-linux-headless
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
