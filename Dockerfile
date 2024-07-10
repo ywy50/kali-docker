@@ -6,8 +6,9 @@ FROM kalilinux/kali-rolling AS base
 RUN mkdir -p /opt/app
 
 ENV RUNTIME_DIR="/opt/app"
-ENV DEBIAN_FRONTEND=noninteractive
 
+# Disable interactive prompts and policy-rc.d execution
+ENV DEBIAN_FRONTEND=noninteractive
 RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && chmod +x /usr/sbin/policy-rc.d
 
 
