@@ -38,4 +38,7 @@ FROM base AS production
 
 COPY ./scripts $RUNTIME_DIR/scripts
 
-ENTRYPOINT /opt/docker-entrypoint.sh $0 $@
+# Use JSON array syntax for ENTRYPOINT
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+
+CMD ["$0", "$@"]
