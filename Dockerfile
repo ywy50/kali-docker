@@ -26,8 +26,9 @@ RUN apt update && apt install -y \
     kali-linux-headless
 
 RUN apt update && apt install -y \
-    slowhttptest
-
+    slowhttptest \
+    thc-ssl-dos
+    
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
 
