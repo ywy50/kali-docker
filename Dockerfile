@@ -3,7 +3,9 @@
 # -----------------------------------------------------------------------------
 FROM kalilinux/kali-rolling AS base
 
-ENV $RUNTIME_DIR="/opt/app" 
+RUN mkdir -p /opt/app
+
+ENV $RUNTIME_DIR="/opt/app"
 
 WORKDIR $RUNTIME_DIR
 
