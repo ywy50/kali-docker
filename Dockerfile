@@ -25,6 +25,9 @@ RUN apt update && apt install -y \
     php-mysql \
     kali-linux-headless
 
+RUN apt update && apt install -y \
+    slowhttptest
+
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
 
@@ -35,16 +38,6 @@ RUN unset DEBIAN_FRONTEND && rm -f /usr/sbin/policy-rc.d
 # Production step
 # -----------------------------------------------------------------------------
 FROM base AS production
-
-# Disable interactive prompts and policy-rc.d execution
-ENV DEBIAN_FRONTEND=noninteractive
-RUN echo '#!/bin/sh\nexit 101' > /usr/sbin/policy-rc.d && chmod +x /usr/sbin/policy-rc.d
-
-RUN apt update && apt install -y \
-    slowhttptest
-
-# Reset DEBIAN_FRONTEND and remove policy-rc.d script
-RUN unset DEBIAN_FRONTEND && rm -f /usr/sbin/policy-rc.d
 
 COPY ./scripts $RUNTIME_DIR/scripts
 
