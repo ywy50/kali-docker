@@ -28,7 +28,10 @@ RUN apt update && apt install -y \
 RUN apt update && apt install -y \
     slowhttptest \
     thc-ssl-dos
-    
+
+RUN wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz && sudo tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
+RUN echo 'PATH=$PATH:/usr/local/go/bin' >> /root/.profile
+
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
 
@@ -39,6 +42,8 @@ RUN unset DEBIAN_FRONTEND && rm -f /usr/sbin/policy-rc.d
 # Production step
 # -----------------------------------------------------------------------------
 FROM base AS production
+
+
 
 COPY ./scripts $RUNTIME_DIR/scripts
 
