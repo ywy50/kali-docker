@@ -36,6 +36,9 @@ RUN unset DEBIAN_FRONTEND && rm -f /usr/sbin/policy-rc.d
 # -----------------------------------------------------------------------------
 FROM base AS production
 
+RUN apt update && apt install -y \
+    slowhttptest
+
 COPY ./scripts $RUNTIME_DIR/scripts
 
 # Use JSON array syntax for ENTRYPOINT
