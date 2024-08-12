@@ -1,2 +1,2 @@
-#!/bin/bashrun.sh
+#!/bin/bash
 sudo docker run -it --rm -v $(pwd)/volume:/opt/app/volume ywy50/kali-tools:latest /bin/bash
