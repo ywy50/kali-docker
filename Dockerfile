@@ -91,8 +91,8 @@ COPY ./scripts $RUNTIME_DIR/scripts
 # CMD ["$0", "$@"]
 
 # Set supervisord as the entrypoint
-# ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 # Start supervisord as the main process
 # CMD ["supervisorctl", "status"]
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
