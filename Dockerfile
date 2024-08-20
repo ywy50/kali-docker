@@ -40,6 +40,30 @@ RUN apt update && apt install -y \
 RUN cp /etc/tor/torrc /etc/tor/torrc.bak
 RUN sed -i 's/^# *\(SocksPort 9050\)/\1/' /etc/tor/torrc
 
+RUN mkdir -p /etc/supervisor/conf.d
+
+# Add the tor.conf for
+RUN cat <<EOF > /etc/supervisor/conf.d/tor.conf
+[program:tor]
+command=/usr/bin/tor
+autostart=true
+autorestart=true
+stdout_logfile=/var/log/tor.out
+stderr_logfile=/var/log/tor.err
+EOF
+
+# Add the main supervisord configuration file
+RUN cat <<EOF > /etc/supervisor/supervisord.conf
+[supervisord]
+logfile=/var/log/supervisord.log
+pidfile=/var/run/supervisord.pid
+
+[include]
+files = /etc/supervisor/conf.d/*.conf
+EOF
+
+# Expose the default Tor port
+EXPOSE 9050
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
@@ -54,7 +78,13 @@ FROM base AS production
 
 COPY ./scripts $RUNTIME_DIR/scripts
 
-# Use JSON array syntax for ENTRYPOINT
-ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+# # Use JSON array syntax for ENTRYPOINT
+# ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 
-CMD ["$0", "$@"]
+# CMD ["$0", "$@"]
+
+# Set supervisord as the entrypoint
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
+# Start supervisord as the main process
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
