@@ -66,6 +66,9 @@ serverurl=unix:///var/run/supervisord.sock ; use a local Unix socket
 files = /etc/supervisor/conf.d/*.conf
 EOF
 
+#Create supervisord log directory
+RUN mkdir -p /var/log/supervisord
+
 # Expose the default Tor port
 EXPOSE 9050
 
