@@ -33,7 +33,8 @@ RUN echo "PATH=$PATH:/usr/local/go/bin" >> /root/.profile
 RUN apt update && apt install -y \
     slowhttptest \
     thc-ssl-dos \
-    siege
+    siege \
+    tor
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 RUN chmod +x /opt/docker-entrypoint.sh
