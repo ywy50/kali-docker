@@ -46,8 +46,8 @@ RUN mkdir -p /etc/supervisor/conf.d
 RUN cat <<EOF > /etc/supervisor/conf.d/tor.conf
 [program:tor]
 command=/usr/bin/tor
-autostart=true
-autorestart=true
+autostart=false
+autorestart=false
 stdout_logfile=/var/log/tor.out
 stderr_logfile=/var/log/tor.err
 EOF
