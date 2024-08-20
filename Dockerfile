@@ -63,6 +63,9 @@ childlogdir=/var/log/supervisord
 file=/var/run/supervisord.sock   ; the path to the socket file
 chmod=0700
 
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
 [supervisorctl]
 serverurl=unix:///var/run/supervisord.sock ; use a local Unix socket
 
