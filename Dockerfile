@@ -86,13 +86,13 @@ FROM base AS production
 COPY ./scripts $RUNTIME_DIR/scripts
 
 # # Use JSON array syntax for ENTRYPOINT
-# ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 
 # CMD ["$0", "$@"]
 
 # Set supervisord as the entrypoint
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+# ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 
 # Start supervisord as the main process
-# CMD ["supervisorctl", "status"]
+CMD ["supervisorctl", "status"]
 # CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
