@@ -35,7 +35,8 @@ RUN apt update && apt install -y \
     thc-ssl-dos \
     siege \
     tor \
-    supervisor
+    supervisor \
+    man-db
 
 RUN cp /etc/tor/torrc /etc/tor/torrc.bak
 RUN sed -i 's/^# *\(SocksPort 9050\)/\1/' /etc/tor/torrc
