@@ -57,6 +57,10 @@ RUN cat <<EOF > /etc/supervisor/supervisord.conf
 [supervisord]
 logfile=/var/log/supervisord.log
 pidfile=/var/run/supervisord.pid
+childlogdir=/var/log/supervisord
+
+[supervisorctl]
+serverurl=unix:///var/run/supervisord.sock ; use a local Unix socket
 
 [include]
 files = /etc/supervisor/conf.d/*.conf
