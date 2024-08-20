@@ -59,6 +59,10 @@ logfile=/var/log/supervisord.log
 pidfile=/var/run/supervisord.pid
 childlogdir=/var/log/supervisord
 
+[unix_http_server]
+file=/var/run/supervisord.sock   ; the path to the socket file
+chmod=0700
+
 [supervisorctl]
 serverurl=unix:///var/run/supervisord.sock ; use a local Unix socket
 
