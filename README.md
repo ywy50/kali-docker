@@ -17,4 +17,5 @@ cd kali-docker
 
 ```bash
 supervisorctl start tor
+supervisorctl status
 ```
